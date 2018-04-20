@@ -1,0 +1,26 @@
+
+<div class="sidebar-wrapper">
+    <div class="logo">
+        <button class="btn btn-sm btn-success btn-icon" (click)="ngxSmartModalService.getModal('myModal').open()"><i class="fa fa-plus"></i>New List</button>
+    </div>
+    <ul class="nav">
+            <li>
+                <a href="#">
+                    <strong>Task lists</strong>
+                </a>
+            </li>
+            <li *ngFor="let list of lists">
+                <a href="#">
+					<i class="fa fa-list-ul"></i>
+					<p>{{list.title}}</p>
+                </a>
+            </li>
+    </ul>
+</div>
+
+<ngx-smart-modal #myModal identifier="myModal">
+<h1>Title</h1>
+<p>Some stuff...</p>
+
+<button (click)="myModal.close()">Close</button>
+</ngx-smart-modal>
