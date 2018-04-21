@@ -1,7 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NgxSmartModalModule } from 'ngx-smart-modal';
+import { FormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { API_KEY } from './app.config';
 
@@ -14,29 +16,40 @@ import { NavbarModule} from './shared/navbar/navbar.module';
 
 import { SignInComponent } from './sign-in/sign-in.component';
 import { TasksComponent } from './tasks/tasks.component';
+import { AddListComponent } from './add-list/add-list.component';
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth.guard';
 import { TaskListService } from './services/task-list.service';
+import { AlertService } from './services/alert.service';
+import { TaskService } from './services/task.service';
+import { CurrentListService } from './services/current-list.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     TasksComponent,
-    SignInComponent
+    SignInComponent,
+    AddListComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(AppRoutes),
-    NgxSmartModalModule.forRoot(),
+    MatDialogModule,
     SidebarModule,
     NavbarModule,
     FooterModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,
     AuthGuard,
-    TaskListService
+    TaskListService,
+    AlertService,
+    TaskService,
+    CurrentListService
   ],
+  entryComponents: [AddListComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

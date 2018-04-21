@@ -1,0 +1,15 @@
+<form #listForm="ngForm" novalidate (ngSubmit)="save(list)">
+  <h1 mat-dialog-title>New List</h1>
+  <div mat-dialog-content>
+    <p>Please enter bellow the list's name</p>
+    <input class="form-control" name="name" required cdkFocusInitial [(ngModel)]="list.title" placeholder="List Name" autocomplete="off">
+
+  </div>
+  <div mat-dialog-actions class="btn-group pull-right" role="group">
+    <button type="button" class="btn btn-danger" (click)="onNoClick()">Cancel</button>
+    <button type="submit" class="btn btn-primary">
+      <i class="fa fa-plus"></i>
+      Save
+    </button>
+  </div>
+</form>

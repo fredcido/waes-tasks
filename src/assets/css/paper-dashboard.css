@@ -1063,7 +1063,7 @@ hr {
   color: #66615b;
   font-size: 14px;
   transition: background-color 0.3s ease 0s;
-  padding: 7px 18px;
+  padding: 27px 18px;
   height: 40px;
   -webkit-box-shadow: none;
   box-shadow: none;
@@ -3987,6 +3987,3 @@ Copyright (c) 2015 Daniel Eden
     display: none;
   }
 }
-
-
-@import "ngx-smart-modal/ngx-smart-modal";
