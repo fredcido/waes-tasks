@@ -7,6 +7,7 @@ import {
     ElementRef,
     ChangeDetectorRef
 } from '@angular/core';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Task } from '../models/task.model';
 import { List } from '../models/list.model';
@@ -38,6 +39,7 @@ export class TasksComponent implements OnInit {
         private alertService: AlertService,
         private zone: NgZone,
         private cdRef: ChangeDetectorRef,
+        private dialog: MatDialog
     ) {
     }
 
@@ -110,6 +112,19 @@ export class TasksComponent implements OnInit {
         this.taskService.save(this.currentList, task, 'PATCH').then(() => {
             this.alertService.success('Task saved successfully');
             // this.listTasks();
+        });
+    }
+
+    editTask() {
+        if (!this.selectedNode) {
+            this.alertService.info('There is not task currently selected');
+            return;
+        }
+
+        const dialogRef = this.dialog.open(AddListComponent, {data: this.selectTask.item});
+
+        dialogRef.afterClosed().subscribe(result => {
+            this.listTasks();
         });
     }
 

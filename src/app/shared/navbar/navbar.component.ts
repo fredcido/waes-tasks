@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit{
     @Output() moveUp = new EventEmitter();
     @Output() moveDown = new EventEmitter();
     @Output() print = new EventEmitter();
+    @Output() onEdit = new EventEmitter();
 
     constructor(
         private router: Router,
@@ -85,5 +86,9 @@ export class NavbarComponent implements OnInit{
 
     triggerPrint() {
         this.print.emit();
+    }
+
+    triggerEditTask() {
+        this.onEdit.emit();
     }
 }
