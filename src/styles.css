@@ -7,6 +7,11 @@
     text-decoration: line-through;
     color: #CCC;
     display: inline-block;
+    width: 100%;
+}
+
+.due-date {
+    display: block;
 }
 
 .undo-task {

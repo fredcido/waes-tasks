@@ -56,18 +56,22 @@
             </button>
         </div>
 
-        <!-- <div class="dropdown pull-right">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                View:
-                <span class="caret"></span>
+        <div class="btn-group pull-right" role="group">
+            <button type="button" class="btn btn-primary" disabled>
+                View
             </button>
-            <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li role="separator" class="divider"></li>
-                <li><a href="#">Separated link</a></li>
-            </ul>
-        </div> -->
+            <button type="button" class="btn btn-info" [class.btn-fill]="isViewActive('default')" (click)="setView('default')">
+                My Order
+            </button>
+            <button type="button" class="btn btn-info" [class.btn-fill]="isViewActive('date')" (click)="setView('date')">
+                Sort by Date
+            </button>
+            <button type="button" class="btn btn-info" [class.btn-fill]="isViewActive('completed')" (click)="setView('completed')">
+                Completed tasks
+            </button>
+            <button type="button" class="btn btn-info" [class.btn-fill]="isViewActive('trash')" (click)="setView('trash')">
+                Trash
+            </button>
+        </div>
     </div>
 </nav>

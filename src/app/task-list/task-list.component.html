@@ -8,7 +8,15 @@
             <input *ngIf="!node.item.isCompleted()" autofocus #taskItem (focus)="selectTask(node)" 
                 (blur)="triggerBlurNode(node)" (change)="changedTask(node)" type="text" required 
                 [(ngModel)]="node.item.title" name="tasks[]" class="form-control" placeholder="Task name">
-            <em *ngIf="node.item.isCompleted()" (click)="selectTask(node)" class="done-task">{{ node.item.title }}</em>
+            <em *ngIf="node.item.isCompleted()" (click)="selectTask(node)" class="done-task">
+                {{ node.item.title }}
+            </em>
+
+            <small class="due-date" *ngIf="node.item.due">{{ node.item.due| date:'fullDate' }}</small>
+            <span *ngIf="node.item.notes">
+                <i class="fa fa-sticky-note"></i>
+                {{ node.item.notes }}
+            </span>
         </div>
         <app-task-list 
             *ngIf="node.children.length"

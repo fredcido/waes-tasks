@@ -249,4 +249,8 @@ export class TasksComponent implements OnInit {
         node.next().insertAfter(node);
         this.moveNode(node);
     }
+
+    changeView(view) {
+
+    }
 }

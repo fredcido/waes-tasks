@@ -15,6 +15,7 @@ import { List } from '../../models/list.model';
 export class NavbarComponent implements OnInit{
     private user: User;
     private currentList: List;
+    private activeView = 'default';
 
     @Output() clearCompleted = new EventEmitter();
     @Output() newTask = new EventEmitter();
@@ -26,6 +27,8 @@ export class NavbarComponent implements OnInit{
     @Output() moveDown = new EventEmitter();
     @Output() print = new EventEmitter();
     @Output() onEdit = new EventEmitter();
+    @Output() changeView: EventEmitter<string> = new EventEmitter<string>();
+
 
     constructor(
         private router: Router,
@@ -91,5 +94,14 @@ export class NavbarComponent implements OnInit{
 
     triggerEditTask() {
         this.onEdit.emit();
+    }
+
+    isViewActive(view) {
+        return view === this.activeView;
+    }
+
+    setView(view) {
+        this.activeView = view;
+        this.changeView.emit(view);
     }
 }
