@@ -6,6 +6,7 @@ export class TreeNode implements IterableIterator<TreeNode> {
     nextNode: TreeNode = null;
     children: TreeNode[] = [];
     parent: TreeNode = null;
+    currentNode: TreeNode = null;
 
     insertBefore(node: TreeNode) {
         node.nextNode = this;
@@ -62,13 +63,19 @@ export class TreeNode implements IterableIterator<TreeNode> {
     }
 
     public next(): IteratorResult<TreeNode> {
-        console.log(this);
-        if (this.nextNode) {
+        if (!this.currentNode) {
+            this.currentNode = this.firstChild();
+        }
+
+        if (this.currentNode && this.currentNode.nextNode) {
+            const nextNode = this.currentNode.nextNode;
+            this.currentNode = nextNode;
             return {
                 done: false,
-                value: this.nextNode
+                value: nextNode
             };
         } else {
+            this.currentNode = null;
             return {
                 done: true,
                 value: null

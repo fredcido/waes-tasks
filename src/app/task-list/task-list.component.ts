@@ -14,7 +14,8 @@ export class TaskListComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+  }
 
   selectTask(node: TreeNode) {
     this.taskSelected.emit(node);

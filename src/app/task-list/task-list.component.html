@@ -1,5 +1,5 @@
 <ul class="list-group">
-    <!-- <li class="list-group-item" *ngFor="let node of root.firstChild()">
+    <li class="list-group-item" *ngFor="let node of root.children">
         <div class="input-group">
             <span class="input-group-addon">
                 <input type="checkbox" tabindex="-1" *ngIf="!node.item.isCompleted()" (focus)="selectTask(node)" (click)="completeTask(node)">
@@ -16,5 +16,5 @@
             (taskSelected)="selectTask($event)"
             (taskCompleted)="completeTask($event)"
             (blurNode)="triggerBlurNode($event)"></app-task-list>
-    </li> -->
+    </li>
 </ul>
