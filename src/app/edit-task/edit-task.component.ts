@@ -2,8 +2,10 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { TaskService } from './../services/task.service';
-import { List } from './../models/list.model';
 import { AlertService } from '../services/alert.service';
+import { Task } from '../models/task.model';
+import { TaskListService } from '../services/task-list.service';
+import { List } from '../models/list.model';
 
 @Component({
     moduleId: module.id,
@@ -11,25 +13,26 @@ import { AlertService } from '../services/alert.service';
     templateUrl: 'edit-task.component.html',
 })
 export class EditTaskComponent implements OnInit {
+    private task: Task;
     private list: List;
+    private lists: List[];
 
     constructor(
       public dialogRef: MatDialogRef<EditTaskComponent>,
       @Inject(MAT_DIALOG_DATA) public data: any,
       private taskService: TaskService,
       private alertService: AlertService,
+      private listService: TaskListService,
     ) { }
 
     ngOnInit() {
-      if (this.data) {
-        this.list = this.data;
-      } else {
-        this.list = new List();
-      }
+        this.task = this.data.task;
+        this.list = this.data.list;
+        this.listService.all().then(lists => this.lists = lists);
     }
 
-    save(list: List) {
-      this.taskService.save(list)
+    save(task: Task) {
+      this.taskService.save(this.list, task, 'PUT')
                       .then(() => {
                         this.alertService.success('List saved successfully');
                         this.dialogRef.close();

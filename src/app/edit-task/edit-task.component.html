@@ -1,0 +1,33 @@
+<form #taskForm="ngForm" novalidate (ngSubmit)="save(task)">
+    <h1 mat-dialog-title>Edit task: {{task?.title}}</h1>
+    <div mat-dialog-content>
+        <p>
+            <input type="checkbox" tabindex="-1" *ngIf="!task.isCompleted()" (click)="task.toggleStatus()">
+            <i class="fa fa-check text-success undo-task" *ngIf="task.isCompleted()" (click)="task.toggleStatus()"></i>
+            <em *ngIf="task.isCompleted()" class="done-task">{{ task.title }}</em>
+            <span *ngIf="!task.isCompleted()">{{ task.title }}</span>
+        </p>
+        <p><input class="form-control" name="title" required cdkFocusInitial [(ngModel)]="task.title" placeholder="Task Name" autocomplete="off"></p>
+        <p>
+            <input matInput [matDatepicker]="picker" placeholder="Due date" name="due" [(ngModel)]="task.due">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </p>
+        <p><textarea name="notes" class="form-control" placeholder="Notes" rows="3" [(ngModel)]="task.notes"></textarea></p>
+        <p>
+            <select name="list" [(ngModel)]="task.list" required class="form-control">
+                <option>Move to list</option>
+                <option *ngFor="let list of lists" [ngValue]="list.id">
+                    {{ list.title }}
+                </option>
+            </select>
+        </p>
+    </div>
+    <div mat-dialog-actions class="btn-group pull-right" role="group">
+        <button type="button" class="btn btn-danger" (click)="onNoClick()">Cancel</button>
+        <button type="submit" class="btn btn-primary">
+            <i class="fa fa-plus"></i>
+            Save
+        </button>
+    </div>
+</form>

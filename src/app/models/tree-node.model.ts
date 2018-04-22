@@ -2,86 +2,56 @@ import { Task } from './task.model';
 
 export class TreeNode {
     item: Task;
-    previous: TreeNode = null;
-    nextNode: TreeNode = null;
     children: TreeNode[] = [];
     parent: TreeNode = null;
 
-    reorderChildren(parent: TreeNode) {
-        const tempChildren = [];
-        let node = parent.firstChild();
-
-        while (node) {
-            tempChildren.push(node);
-            node = node.nextNode;
-        }
-
-        parent.children = tempChildren;
-    }
-
     insertBefore(node: TreeNode) {
-        node.nextNode = this;
-        if (this.previous) {
-            this.previous.nextNode = node;
-        }
-
-        this.previous = node;
-        // if (this.parent) {
-        //     this.reorderChildren(this.parent);
-        // }
+        this.parent.children = this.parent.children.filter(item => item !== node);
+        const index = this.parent.children.indexOf(this);
+        this.parent.children.splice(index, 0, node);
     }
 
     insertAfter(node: TreeNode) {
-        node.previous = this;
-        if (this.nextNode) {
-            this.nextNode.previous = node;
-        }
-
-        this.nextNode = node;
-        // if (this.parent) {
-        //     this.reorderChildren(this.parent);
-        // }
-    }
-
-    firstChild(): TreeNode {
-        return this.children.find(node => !node.previous);
-    }
-
-    lastChild(): TreeNode {
-        return this.children.find(node => !node.nextNode);
+        this.parent.children = this.parent.children.filter(item => item !== node);
+        const index = this.parent.children.indexOf(this);
+        this.parent.children.splice(index + 1, 0, node);
     }
 
     unshiftChild(node: TreeNode) {
-        this.children.push(node);
-        if (this.children.length) {
-            this.firstChild().insertBefore(node);
-        }
-
+        this.children.unshift(node);
         node.parent = this;
     }
 
     addChild(node: TreeNode) {
-        node.previous = null;
-        node.nextNode = null;
-
-        this.children.push(node);
-        if (this.children.length) {
-            this.lastChild().insertAfter(node);
-        }
-
         node.parent = this;
+        this.children.push(node);
     }
 
     removeChild(node: TreeNode) {
-        if (node.previous) {
-            node.previous.nextNode = node.nextNode;
-        }
-
-        if (node.nextNode) {
-            node.nextNode.previous = node.previous;
-        }
-
         this.children = this.children.filter(item => item !== node);
         node.parent = null;
+    }
+
+    previous(): TreeNode {
+        const collection = this.parent.children;
+        const index = collection.indexOf(this);
+
+        return index > 0 ? collection[index - 1] : null;
+    }
+
+    next(): TreeNode {
+        const collection = this.parent.children;
+        const index = collection.indexOf(this);
+        const last = collection.length - 1;
+
+        return index >= last ? null : collection[index + 1];
+    }
+
+    setParent(parent: TreeNode) {
+        if (this.parent) {
+            this.parent.removeChild(this);
+        }
+
+        parent.addChild(this);
     }
 }

@@ -1,11 +1,10 @@
 export class Task {
     id?: string;
-    kind: string;
     title: string;
-    selfLink: string;
+    details: string;
     updated: Date;
+    due: Date;
     status: string;
-    position: string;
     parent: string;
 
     isCompleted(): boolean {

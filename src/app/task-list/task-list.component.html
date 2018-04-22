@@ -1,5 +1,5 @@
 <ul class="list-group">
-    <li class="list-group-item" *ngFor="let node of root.children">
+    <li class="list-group-item" [class.selected]="isSelected(node)" *ngFor="let node of root.children">
         <div class="input-group">
             <span class="input-group-addon">
                 <input type="checkbox" tabindex="-1" *ngIf="!node.item.isCompleted()" (focus)="selectTask(node)" (click)="completeTask(node)">
@@ -8,13 +8,14 @@
             <input *ngIf="!node.item.isCompleted()" autofocus #taskItem (focus)="selectTask(node)" 
                 (blur)="triggerBlurNode(node)" (change)="changedTask(node)" type="text" required 
                 [(ngModel)]="node.item.title" name="tasks[]" class="form-control" placeholder="Task name">
-            <em *ngIf="node.item.isCompleted()" class="done-task">{{ node.item.title }}</em>
+            <em *ngIf="node.item.isCompleted()" (click)="selectTask(node)" class="done-task">{{ node.item.title }}</em>
         </div>
         <app-task-list 
             *ngIf="node.children.length"
             [root]="node" 
             (taskSelected)="selectTask($event)"
             (taskCompleted)="completeTask($event)"
-            (blurNode)="triggerBlurNode($event)"></app-task-list>
+            (blurNode)="triggerBlurNode($event)"
+            (onChange)="changedTask($event)"></app-task-list>
     </li>
 </ul>

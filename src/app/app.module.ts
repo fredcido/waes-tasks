@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 
 import { API_KEY } from './app.config';
 
@@ -18,6 +18,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { AddListComponent } from './add-list/add-list.component';
 import { TaskListComponent } from './task-list/task-list.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth.guard';
@@ -32,12 +33,15 @@ import { CurrentListService } from './services/current-list.service';
     TasksComponent,
     SignInComponent,
     AddListComponent,
-    TaskListComponent
+    TaskListComponent,
+    EditTaskComponent
   ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(AppRoutes),
     MatDialogModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     SidebarModule,
     NavbarModule,
     FooterModule,
@@ -52,7 +56,7 @@ import { CurrentListService } from './services/current-list.service';
     TaskService,
     CurrentListService
   ],
-  entryComponents: [AddListComponent],
+  entryComponents: [AddListComponent, EditTaskComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

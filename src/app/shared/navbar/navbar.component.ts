@@ -46,6 +46,7 @@ export class NavbarComponent implements OnInit{
     logout() {
         this.authService.signOut().then(() =>  {
             this.ngZone.run(() => {
+                location.reload(true);
                 this.router.navigateByUrl('signin');
                 this.router.navigate(['/signin']);
             });

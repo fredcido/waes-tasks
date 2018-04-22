@@ -2,14 +2,16 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 .done-task {
-    padding: 10px;
+    padding: 16px;
     display: inline-block;
     text-decoration: line-through;
     color: #CCC;
+    display: inline-block;
 }
 
 .undo-task {
     cursor: pointer;
+    padding: 10px;
 }
 
 .list-group {
@@ -51,4 +53,10 @@
 
 .sidebar-wrapper .pull-right {
     margin-right: 0px !important;
+}
+
+.list-group-item.selected > .input-group .input-group-addon,
+.list-group-item.selected > .input-group .form-control,
+.list-group-item.selected > .input-group .done-task {
+    background-color: rgb(247, 247, 230) !important;
 }

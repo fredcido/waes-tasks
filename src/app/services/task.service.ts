@@ -28,20 +28,21 @@ export class TaskService {
         const tempReference = {};
         const root = new TreeNode();
 
-        tasks.forEach(task => {
-            const node = new TreeNode();
-            node.item =  Object.assign(new Task(), task);
+        if (tasks) {
+            tasks.forEach(task => {
+                const node = new TreeNode();
+                node.item =  Object.assign(new Task(), task);
 
-            tempReference[task.id] = node;
+                tempReference[task.id] = node;
 
-            if (task.parent) {
-                tempReference[task.parent].addChild(node);
-            } else {
-                root.addChild(node);
-            }
-        });
-
-        console.log(root);
+                if (task.parent && tempReference[task.parent]) {
+                    tempReference[task.parent].addChild(node);
+                } else {
+                    task.parent = null;
+                    root.addChild(node);
+                }
+            });
+        }
 
         return root;
     }

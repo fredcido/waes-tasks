@@ -13,12 +13,15 @@ export class TaskListComponent implements OnInit {
   @Output() blurNode: EventEmitter<TreeNode> = new EventEmitter<TreeNode>();
   @Output() onChange: EventEmitter<TreeNode> = new EventEmitter<TreeNode>();
 
+  private node: TreeNode = null;
+
   constructor() { }
 
   ngOnInit() {
   }
 
   selectTask(node: TreeNode) {
+    this.node = node;
     this.taskSelected.emit(node);
   }
 
@@ -27,10 +30,15 @@ export class TaskListComponent implements OnInit {
   }
 
   triggerBlurNode(node: TreeNode) {
+    // this.node = null;
     this.blurNode.emit(node);
   }
 
   changedTask(node: TreeNode) {
     this.onChange.emit(node);
+  }
+
+  isSelected(node: TreeNode) {
+    return node === this.node;
   }
 }

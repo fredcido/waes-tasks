@@ -16,6 +16,7 @@ import { CurrentListService } from './../services/current-list.service';
 import { TaskService } from './../services/task.service';
 import { TaskListService } from './../services/task-list.service';
 import { TreeNode } from '../models/tree-node.model';
+import { EditTaskComponent } from './../edit-task/edit-task.component';
 
 @Component({
     selector: 'app-tasks',
@@ -109,9 +110,8 @@ export class TasksComponent implements OnInit {
             method = 'PATCH';
         }
 
-        this.taskService.save(this.currentList, task, 'PATCH').then(() => {
+        this.taskService.save(this.currentList, task, method).then(() => {
             this.alertService.success('Task saved successfully');
-            // this.listTasks();
         });
     }
 
@@ -121,7 +121,15 @@ export class TasksComponent implements OnInit {
             return;
         }
 
-        const dialogRef = this.dialog.open(AddListComponent, {data: this.selectTask.item});
+        const dialogRef = this.dialog.open(
+                                EditTaskComponent,
+                                {
+                                    data: {
+                                        task: this.selectedNode.item,
+                                        list: this.currentList
+                                    }
+                                }
+                        );
 
         dialogRef.afterClosed().subscribe(result => {
             this.listTasks();
@@ -175,15 +183,13 @@ export class TasksComponent implements OnInit {
             parentTask = node.parent.item;
         }
 
-        if (node.previous) {
-            previousTask = node.previous.item;
+        if (node.previous()) {
+            previousTask = node.previous().item;
         }
 
-        console.log(task, parentTask, previousTask);
-
-        // this.taskService.move(this.currentList, task, parentTask, previousTask).then(() => {
-        //     this.selectedNode = null;
-        // });
+        this.taskService.move(this.currentList, task, parentTask, previousTask).then(() => {
+            // this.selectedNode = null;
+        });
     }
 
     moveRight() {
@@ -192,17 +198,11 @@ export class TasksComponent implements OnInit {
         }
 
         const node = this.selectedNode;
-        if (!node.previous) {
+        if (!node.previous()) {
             return;
         }
 
-        // node.parent.removeChild(node);
-        // node.previous.addChild(node);
-
-        node.parent = node.previous;
-        node.previous = null;
-        console.log(node);
-
+        node.setParent(node.previous());
         this.moveNode(node);
     }
 
@@ -219,7 +219,6 @@ export class TasksComponent implements OnInit {
         const grandpa = node.parent.parent;
         node.parent.removeChild(node);
         grandpa.addChild(node);
-
         this.moveNode(node);
     }
 
@@ -229,12 +228,11 @@ export class TasksComponent implements OnInit {
         }
 
         const node = this.selectedNode;
-        if (!node.previous) {
+        if (!node.previous()) {
             return;
         }
 
-        node.previous.insertBefore(node);
-
+        node.previous().insertBefore(node);
         this.moveNode(node);
     }
 
@@ -244,12 +242,11 @@ export class TasksComponent implements OnInit {
         }
 
         const node = this.selectedNode;
-        if (!node.nextNode) {
+        if (!node.next()) {
             return;
         }
 
-        node.nextNode.insertAfter(node);
-
+        node.next().insertAfter(node);
         this.moveNode(node);
     }
 }

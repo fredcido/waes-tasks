@@ -14,6 +14,7 @@ import { CurrentListService } from './../services/current-list.service';
 
 export class SidebarComponent implements OnInit {
     private lists: List[];
+    private currentList: List = null;
     closeResult: string;
 
     constructor(
@@ -24,17 +25,28 @@ export class SidebarComponent implements OnInit {
 
     ngOnInit() {
         this.loadItems();
+
+        this.currentListService.getObservable().subscribe(list => {
+            this.currentList = list;
+        });
     }
 
     loadItems() {
         this.listService.all().then(
             lists => {
                 this.lists = lists;
-                if (lists.length && !this.currentListService.getList()) {
-                    this.currentListService.setList(lists[0]);
-                }
+                this.setFirstList();
             }
         );
+    }
+
+    setFirstList() {
+        let first = null;
+        if (this.lists.length && !this.currentListService.getList()) {
+            first = this.lists[0];
+        }
+
+        this.currentListService.setList(first);
     }
 
     newList(): void {
@@ -58,6 +70,13 @@ export class SidebarComponent implements OnInit {
     }
 
     removeList(list: List) {
-        this.listService.delete(list).then(() => this.loadItems());
+        this.listService.delete(list).then(
+            () => {
+                this.loadItems();
+                if (list === this.currentList) {
+                    this.setFirstList();
+                }
+            }
+        );
     }
 }
