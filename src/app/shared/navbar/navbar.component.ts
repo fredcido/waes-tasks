@@ -20,6 +20,11 @@ export class NavbarComponent implements OnInit{
     @Output() newTask = new EventEmitter();
     @Output() deleteTask = new EventEmitter();
     @Output() refresh = new EventEmitter();
+    @Output() moveRight = new EventEmitter();
+    @Output() moveLeft = new EventEmitter();
+    @Output() moveUp = new EventEmitter();
+    @Output() moveDown = new EventEmitter();
+    @Output() print = new EventEmitter();
 
     constructor(
         private router: Router,
@@ -60,5 +65,25 @@ export class NavbarComponent implements OnInit{
 
     triggerRefresh() {
         this.refresh.emit();
+    }
+
+    triggerMoveRight() {
+        this.moveRight.emit();
+    }
+
+    triggerMoveLeft() {
+        this.moveLeft.emit();
+    }
+
+    triggerMoveUp() {
+        this.moveUp.emit();
+    }
+
+    triggerMoveDown() {
+        this.moveDown.emit();
+    }
+
+    triggerPrint() {
+        this.print.emit();
     }
 }

@@ -6,8 +6,13 @@ export class Task {
     updated: Date;
     status: string;
     position: string;
+    parent: string;
 
-    get completed() {
+    isCompleted(): boolean {
         return 'completed' === this.status;
+    }
+
+    toggleStatus() {
+        this.status = 'completed' !== this.status ? 'completed' : 'needsAction';
     }
 }

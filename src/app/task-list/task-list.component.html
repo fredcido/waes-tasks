@@ -1,0 +1,20 @@
+<ul class="list-group">
+    <!-- <li class="list-group-item" *ngFor="let node of root.firstChild()">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <input type="checkbox" tabindex="-1" *ngIf="!node.item.isCompleted()" (focus)="selectTask(node)" (click)="completeTask(node)">
+                <i class="fa fa-check text-success undo-task" *ngIf="node.item.isCompleted()" (click)="completeTask(node)"></i>
+            </span>
+            <input *ngIf="!node.item.isCompleted()" autofocus #taskItem (focus)="selectTask(node)" 
+                (blur)="triggerBlurNode(node)" (change)="saveTask(node)" type="text" required 
+                [(ngModel)]="node.item.title" name="tasks[]" class="form-control" placeholder="Task name">
+            <em *ngIf="node.item.isCompleted()" class="done-task">{{ node.item.title }}</em>
+        </div>
+        <app-task-list 
+            *ngIf="node.children.length"
+            [root]="node" 
+            (taskSelected)="selectTask($event)"
+            (taskCompleted)="completeTask($event)"
+            (blurNode)="triggerBlurNode($event)"></app-task-list>
+    </li> -->
+</ul>

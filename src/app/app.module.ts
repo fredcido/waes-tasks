@@ -17,6 +17,8 @@ import { NavbarModule} from './shared/navbar/navbar.module';
 import { SignInComponent } from './sign-in/sign-in.component';
 import { TasksComponent } from './tasks/tasks.component';
 import { AddListComponent } from './add-list/add-list.component';
+import { TaskListComponent } from './task-list/task-list.component';
+
 import { AuthService } from './services/auth.service';
 import { AuthGuard } from './services/auth.guard';
 import { TaskListService } from './services/task-list.service';
@@ -29,7 +31,8 @@ import { CurrentListService } from './services/current-list.service';
     AppComponent,
     TasksComponent,
     SignInComponent,
-    AddListComponent
+    AddListComponent,
+    TaskListComponent
   ],
   imports: [
     BrowserModule,

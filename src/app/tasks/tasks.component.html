@@ -8,42 +8,19 @@
             (newTask)="addNewTask()"
             (deleteTask)="deleteTask()"
             (refresh)="listTasks()"
+            (moveRight)="moveRight()"
+            (moveLeft)="moveLeft()"
+            (moveUp)="moveUp()"
+            (moveDown)="moveDown()"
             ></app-navbar>
         <div class="content">
             <div class="container-fluid">
-                <ul class="list-group">
-                    <li class="list-group-item" *ngFor="let task of tasks">
-                        <div class="input-group">
-                            <span class="input-group-addon">
-                                <input type="checkbox" *ngIf="!task.completed" (focus)="selectTask(task)" (click)="completeTask(task, 'completed')">
-                                <i class="fa fa-check text-success undo-task" *ngIf="task.completed" (click)="completeTask(task, 'needsAction')"></i>
-                            </span>
-                            <input *ngIf="!task.completed" #taskItem (focus)="selectTask(task)" (blur)="removeEmptyTask(task)" (change)="saveTask(task)" type="text" required [(ngModel)]="task.title" name="tasks[]" class="form-control" placeholder="Task name">
-                            <em *ngIf="task.completed" class="done-task">{{ task.title }}</em>
-                        </div>
-
-                        <!-- <div class="input-group">
-                            <span class="input-group-addon">
-                                <button class="btn btn-warning" tabindex="-1" *ngIf="!task.completed" (click)="completeTask(task, 'completed')">
-                                    <i class="fa fa-exclamation-circle"></i>
-                                </button>
-        
-                                <button class="btn btn-success" tabindex="-1" *ngIf="task.completed" (click)="completeTask(task, 'needsAction')">
-                                    <i class="fa fa-check"></i>
-                                </button>
-                            </span>
-
-                            <input *ngIf="!task.completed" type="text" required [(ngModel)]="task.title" name="tasks[]" class="form-control" placeholder="Task name">
-                            <em *ngIf="task.completed">{{ task.title }}</em>
-
-                            <span class="input-group-addon">
-                                <button type="button" tabindex="-1" class="btn btn-danger" (click)="removeItem(i)" tabindex="-1">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </span>
-                        </div> -->
-                    </li>
-                </ul>
+                <app-task-list 
+                    *ngIf="rootNode" 
+                    [root]="rootNode" 
+                    (taskSelected)="selectTask($event)"
+                    (taskCompleted)="completeTask($event)"
+                    (blurNode)="removeEmptyTask($event)"></app-task-list>
             </div>
         </div>
         <app-footer></app-footer>
