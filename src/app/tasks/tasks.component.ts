@@ -95,15 +95,21 @@ export class TasksComponent implements OnInit {
         // this.taskItem.first.nativeElement.focus();
     }
 
-    saveTask(task: Task) {
+    saveTask(node: TreeNode) {
+        const task = node.item;
         // We don't save the task when there is no title
         if (!task.title) {
             return;
         }
 
-        this.taskService.save(this.currentList, task).then(() => {
+        let method = 'POST';
+        if (task.id) {
+            method = 'PATCH';
+        }
+
+        this.taskService.save(this.currentList, task, 'PATCH').then(() => {
             this.alertService.success('Task saved successfully');
-            this.listTasks();
+            // this.listTasks();
         });
     }
 
@@ -145,6 +151,26 @@ export class TasksComponent implements OnInit {
         this.removeNode(this.selectedNode);
     }
 
+    moveNode(node: TreeNode) {
+        const task = node.item;
+        let parentTask = null;
+        let previousTask = null;
+
+        if (node.parent) {
+            parentTask = node.parent.item;
+        }
+
+        if (node.previous) {
+            previousTask = node.previous.item;
+        }
+
+        console.log(task, parentTask, previousTask);
+
+        // this.taskService.move(this.currentList, task, parentTask, previousTask).then(() => {
+        //     this.selectedNode = null;
+        // });
+    }
+
     moveRight() {
         if (!this.selectedNode) {
             return;
@@ -155,11 +181,14 @@ export class TasksComponent implements OnInit {
             return;
         }
 
-        node.parent.removeChild(node);
-        node.previous.addChild(node);
-        node.previous = null;
+        // node.parent.removeChild(node);
+        // node.previous.addChild(node);
 
+        node.parent = node.previous;
+        node.previous = null;
         console.log(node);
+
+        this.moveNode(node);
     }
 
     moveLeft() {
@@ -176,7 +205,7 @@ export class TasksComponent implements OnInit {
         node.parent.removeChild(node);
         grandpa.addChild(node);
 
-        console.log(node);
+        this.moveNode(node);
     }
 
     moveUp() {
@@ -191,7 +220,7 @@ export class TasksComponent implements OnInit {
 
         node.previous.insertBefore(node);
 
-        console.log(node);
+        this.moveNode(node);
     }
 
     moveDown() {
@@ -206,6 +235,6 @@ export class TasksComponent implements OnInit {
 
         node.nextNode.insertAfter(node);
 
-        console.log(node);
+        this.moveNode(node);
     }
 }

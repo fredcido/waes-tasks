@@ -11,6 +11,7 @@ export class TaskListComponent implements OnInit {
   @Output() taskSelected: EventEmitter<TreeNode> = new EventEmitter<TreeNode>();
   @Output() taskCompleted: EventEmitter<TreeNode> = new EventEmitter<TreeNode>();
   @Output() blurNode: EventEmitter<TreeNode> = new EventEmitter<TreeNode>();
+  @Output() onChange: EventEmitter<TreeNode> = new EventEmitter<TreeNode>();
 
   constructor() { }
 
@@ -27,5 +28,9 @@ export class TaskListComponent implements OnInit {
 
   triggerBlurNode(node: TreeNode) {
     this.blurNode.emit(node);
+  }
+
+  changedTask(node: TreeNode) {
+    this.onChange.emit(node);
   }
 }

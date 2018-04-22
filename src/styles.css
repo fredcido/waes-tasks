@@ -48,3 +48,7 @@
 .list-group-item .input-group-addon {
     background-color: #fff !important;
 }
+
+.sidebar-wrapper .pull-right {
+    margin-right: 0px !important;
+}

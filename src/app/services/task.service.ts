@@ -82,4 +82,30 @@ export class TaskService {
             });
         });
     }
+
+    move(list: List, task: Task, parent: Task = null, previous: Task = null): Promise<Task> {
+        return new Promise<Task>((resolve, reject) => {
+            const url = `${ENDPOINT}${list.id}/tasks/${task.id}/move`;
+            let params = {};
+            if (parent) {
+                params = {...params, parent: parent.id};
+            }
+
+            if (previous) {
+                params = {...params, previous: previous.id};
+            }
+
+            gapi.client.request(
+                {
+                    'path': url,
+                    'method': 'POST',
+                    'params': params
+                }
+            ).then((response) => {
+                resolve(response);
+            }, (reason) => {
+                reject(reason);
+            });
+        });
+    }
 }

@@ -6,7 +6,7 @@
                 <i class="fa fa-check text-success undo-task" *ngIf="node.item.isCompleted()" (click)="completeTask(node)"></i>
             </span>
             <input *ngIf="!node.item.isCompleted()" autofocus #taskItem (focus)="selectTask(node)" 
-                (blur)="triggerBlurNode(node)" (change)="saveTask(node)" type="text" required 
+                (blur)="triggerBlurNode(node)" (change)="changedTask(node)" type="text" required 
                 [(ngModel)]="node.item.title" name="tasks[]" class="form-control" placeholder="Task name">
             <em *ngIf="node.item.isCompleted()" class="done-task">{{ node.item.title }}</em>
         </div>

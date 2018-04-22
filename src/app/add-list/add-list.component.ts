@@ -21,7 +21,11 @@ export class AddListComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-      this.list = new List();
+      if (this.data) {
+        this.list = this.data;
+      } else {
+        this.list = new List();
+      }
     }
 
     save(list: List) {

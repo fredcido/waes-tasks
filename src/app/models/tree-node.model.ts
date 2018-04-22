@@ -1,19 +1,34 @@
 import { Task } from './task.model';
 
-export class TreeNode implements IterableIterator<TreeNode> {
+export class TreeNode {
     item: Task;
     previous: TreeNode = null;
     nextNode: TreeNode = null;
     children: TreeNode[] = [];
     parent: TreeNode = null;
-    currentNode: TreeNode = null;
+
+    reorderChildren(parent: TreeNode) {
+        const tempChildren = [];
+        let node = parent.firstChild();
+
+        while (node) {
+            tempChildren.push(node);
+            node = node.nextNode;
+        }
+
+        parent.children = tempChildren;
+    }
 
     insertBefore(node: TreeNode) {
         node.nextNode = this;
         if (this.previous) {
             this.previous.nextNode = node;
         }
+
         this.previous = node;
+        // if (this.parent) {
+        //     this.reorderChildren(this.parent);
+        // }
     }
 
     insertAfter(node: TreeNode) {
@@ -21,7 +36,11 @@ export class TreeNode implements IterableIterator<TreeNode> {
         if (this.nextNode) {
             this.nextNode.previous = node;
         }
+
         this.nextNode = node;
+        // if (this.parent) {
+        //     this.reorderChildren(this.parent);
+        // }
     }
 
     firstChild(): TreeNode {
@@ -33,21 +52,24 @@ export class TreeNode implements IterableIterator<TreeNode> {
     }
 
     unshiftChild(node: TreeNode) {
+        this.children.push(node);
         if (this.children.length) {
             this.firstChild().insertBefore(node);
         }
 
         node.parent = this;
-        this.children.unshift(node);
     }
 
     addChild(node: TreeNode) {
+        node.previous = null;
+        node.nextNode = null;
+
+        this.children.push(node);
         if (this.children.length) {
             this.lastChild().insertAfter(node);
         }
 
         node.parent = this;
-        this.children.push(node);
     }
 
     removeChild(node: TreeNode) {
@@ -60,30 +82,6 @@ export class TreeNode implements IterableIterator<TreeNode> {
         }
 
         this.children = this.children.filter(item => item !== node);
-    }
-
-    public next(): IteratorResult<TreeNode> {
-        if (!this.currentNode) {
-            this.currentNode = this.firstChild();
-        }
-
-        if (this.currentNode && this.currentNode.nextNode) {
-            const nextNode = this.currentNode.nextNode;
-            this.currentNode = nextNode;
-            return {
-                done: false,
-                value: nextNode
-            };
-        } else {
-            this.currentNode = null;
-            return {
-                done: true,
-                value: null
-            };
-        }
-    }
-
-    [Symbol.iterator](): IterableIterator<TreeNode> {
-        return this;
+        node.parent = null;
     }
 }

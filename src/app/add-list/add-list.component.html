@@ -1,5 +1,6 @@
 <form #listForm="ngForm" novalidate (ngSubmit)="save(list)">
-  <h1 mat-dialog-title>New List</h1>
+  <h1 mat-dialog-title *ngIf="!list.id">New List</h1>
+  <h1 mat-dialog-title *ngIf="list.id">Edit list: {{list.title}}</h1>
   <div mat-dialog-content>
     <p>Please enter bellow the list's name</p>
     <input class="form-control" name="name" required cdkFocusInitial [(ngModel)]="list.title" placeholder="List Name" autocomplete="off">

@@ -10,16 +10,10 @@
             </a>
         </li>
         <li *ngFor="let list of lists">
-            <a href="javascript:;" (click)="changeCurrentList(list)">
-                <i class="fa fa-list-ul dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
-                <p>{{list.title}}</p>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Separated link</a>
-                </div>
+            <a href="javascript:;">
+                <p class="pull-left" (click)="changeCurrentList(list)">{{list.title}}</p>
+                <i class="fa fa-trash pull-right text-danger" (click)="removeList(list)"></i>
+                <i class="fa fa-pencil pull-right text-warning" (click)="editList(list)"></i>
             </a>
         </li>
     </ul>

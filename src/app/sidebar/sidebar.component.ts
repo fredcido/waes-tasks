@@ -48,4 +48,16 @@ export class SidebarComponent implements OnInit {
     changeCurrentList(list: List) {
         this.currentListService.setList(list);
     }
+
+    editList(list: List) {
+        const dialogRef = this.dialog.open(AddListComponent, {data: list});
+
+        dialogRef.afterClosed().subscribe(result => {
+            this.loadItems();
+        });
+    }
+
+    removeList(list: List) {
+        this.listService.delete(list).then(() => this.loadItems());
+    }
 }

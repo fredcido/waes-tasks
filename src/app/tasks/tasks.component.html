@@ -20,6 +20,7 @@
                     [root]="rootNode" 
                     (taskSelected)="selectTask($event)"
                     (taskCompleted)="completeTask($event)"
+                    (onChange)="saveTask($event)"
                     (blurNode)="removeEmptyTask($event)"></app-task-list>
             </div>
         </div>
