@@ -4,8 +4,8 @@ declare var $: any;
 
 @Injectable()
 export class AlertService {
-    public from = 'top';
-    public align = 'center';
+    public from = 'bottom';
+    public align = 'right';
 
     showNotification(message, type, icon = 'ti-gift') {
         $.notify({
