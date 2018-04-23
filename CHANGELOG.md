@@ -1,0 +1,15 @@
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/6be87c8a2e5babe5ff510a4976eef9074d20741b">view commit &bull;</a> Initial commit</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/d2bc8e9610e046a78fc980396b572a4f73f88a5a">view commit &bull;</a> Create README.md</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/657e424168aa35fba721224a986312f1c129ffae">view commit &bull;</a> Initial commit</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/867a348582717bbc0caf60febb8ba079f2620792">view commit &bull;</a> Fixing README conflict</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/8b9235274808780241fcafb4590c0a1748281da9">view commit &bull;</a> Task form</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/b2acd6ec1389b23527af080efba4456d4bbc20a8">view commit &bull;</a> TreeLike structure</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/7300dbd8635f902e3c5aea4dd2fe1698c80bfe58">view commit &bull;</a> Tree recursive iterator</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/adb531b00013a224ee5d39615bb49ad7335e178e">view commit &bull;</a> Editing lists</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/1baeded325dbd0467d00726c39d0a0749d926b17">view commit &bull;</a> Edit list</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/4d799efa3ff53d103147b8ae47034ab53bdba8c2">view commit &bull;</a> Saving tasks</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/295a79ef037de2fa4b125b35ed687fa95b92601f">view commit &bull;</a> view switcher</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/ebe656ba929fbe5397f4cce45328c699370a7e65">view commit &bull;</a> Url hash strategy</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/d4987d7b2da218f48e956da53020232c8f2dc05d">view commit &bull;</a> Pushing local tests</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/11bd55a546f8943957685790d2299b4181de7151">view commit &bull;</a> Setting License</li> 
+<li> <a href="http://github.com/fredcido/waes-tasks/commit/4a91f860f819961e85c8e97d0364903d9c59af2e">view commit &bull;</a> Removing CHANGELOG</li> 
