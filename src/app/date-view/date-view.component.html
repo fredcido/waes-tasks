@@ -1,0 +1,27 @@
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let date of dateItems">
+        <strong>{{ date.date }}</strong>
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let node of date.items" [class.selected]="isSelected(node)">
+                <div class="input-group">
+                    <span class="input-group-addon">
+                        <input type="checkbox" tabindex="-1" *ngIf="!node.item.isCompleted()" (focus)="selectTask(node)" (click)="completeTask(node)">
+                        <i class="fa fa-check text-success undo-task" *ngIf="node.item.isCompleted()" (click)="completeTask(node)"></i>
+                    </span>
+                    <input *ngIf="!node.item.isCompleted()" autofocus #taskItem (focus)="selectTask(node)" 
+                        (blur)="triggerBlurNode(node)" (change)="changedTask(node)" type="text" required 
+                        [(ngModel)]="node.item.title" name="tasks[]" class="form-control" placeholder="Task name">
+                    <em *ngIf="node.item.isCompleted()" (click)="selectTask(node)" class="done-task">
+                        {{ node.item.title }}
+                    </em>
+        
+                    <small class="due-date" *ngIf="node.item.due">{{ node.item.due| date:'fullDate' }}</small>
+                    <span *ngIf="node.item.notes" class="notes">
+                        <i class="fa fa-sticky-note"></i>
+                        {{ node.item.notes }}
+                    </span>
+                </div>
+            </li>
+        </ul>
+    </li>
+</ul>

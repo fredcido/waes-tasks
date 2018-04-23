@@ -13,9 +13,9 @@ import { List } from '../models/list.model';
     templateUrl: 'edit-task.component.html',
 })
 export class EditTaskComponent implements OnInit {
-    private task: Task;
-    private list: List;
-    private lists: List[];
+    task: Task;
+    list: List;
+    lists: List[];
 
     constructor(
       public dialogRef: MatDialogRef<EditTaskComponent>,

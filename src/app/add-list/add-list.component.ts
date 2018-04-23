@@ -11,7 +11,7 @@ import { AlertService } from '../services/alert.service';
     templateUrl: 'add-list.component.html',
 })
 export class AddListComponent implements OnInit {
-    private list: List;
+    list: List;
 
     constructor(
       public dialogRef: MatDialogRef<AddListComponent>,

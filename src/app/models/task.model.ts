@@ -6,6 +6,8 @@ export class Task {
     due: Date;
     status: string;
     parent: string;
+    notes: string;
+    completed: string;
 
     isCompleted(): boolean {
         return 'completed' === this.status;

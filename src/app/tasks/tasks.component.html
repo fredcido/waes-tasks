@@ -17,10 +17,15 @@
             ></app-navbar>
         <div class="content">
             <div class="container-fluid">
+                <app-date-view
+                    *ngIf="rootNode && isViewActive('date')"
+                    (taskCompleted)="completeTask($event)"
+                    (onChange)="saveTask($event)"
+                    (blurNode)="removeEmptyTask($event)"
+                    [root]="rootNode"></app-date-view>
                 <app-task-list 
-                    *ngIf="rootNode" 
-                    [root]="rootNode" 
-                    (taskSelected)="selectTask($event)"
+                    *ngIf="rootNode && isViewActive('default')" 
+                    [root]="rootNode"
                     (taskCompleted)="completeTask($event)"
                     (onChange)="saveTask($event)"
                     (blurNode)="removeEmptyTask($event)"></app-task-list>

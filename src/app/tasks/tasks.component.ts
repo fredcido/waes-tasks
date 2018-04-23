@@ -13,6 +13,7 @@ import { Task } from '../models/task.model';
 import { List } from '../models/list.model';
 import { AlertService } from '../services/alert.service';
 import { CurrentListService } from './../services/current-list.service';
+import { CurrentTaskService } from './../services/current-task.service';
 import { TaskService } from './../services/task.service';
 import { TaskListService } from './../services/task-list.service';
 import { TreeNode } from '../models/tree-node.model';
@@ -28,13 +29,15 @@ export class TasksComponent implements OnInit {
 
     @ViewChildren('taskItem') taskItem: QueryList<ElementRef>;
 
-    private tasks: TreeNode[] = [];
-    private rootNode: TreeNode;
-    private currentList: List;
-    private selectedNode: TreeNode;
+    tasks: TreeNode[] = [];
+    rootNode: TreeNode;
+    currentList: List;
+    selectedNode: TreeNode;
+    activeView = 'default';
 
     constructor(
         private currentListService: CurrentListService,
+        private currentTaskService: CurrentTaskService,
         private listService: TaskListService,
         private taskService: TaskService,
         private alertService: AlertService,
@@ -50,6 +53,10 @@ export class TasksComponent implements OnInit {
             this.currentList = list;
             this.selectedNode = null;
             this.listTasks();
+        });
+
+        this.currentTaskService.getObservable().subscribe(task => {
+            this.selectedNode = task;
         });
     }
 
@@ -68,6 +75,10 @@ export class TasksComponent implements OnInit {
         updateTask.id = task.id;
         task.toggleStatus();
         updateTask.status = task.status;
+
+        if (!updateTask.isCompleted()) {
+            updateTask.completed = null;
+        }
 
         node.children.map(child => this.completeTask(child));
 
@@ -110,8 +121,10 @@ export class TasksComponent implements OnInit {
             method = 'PATCH';
         }
 
-        this.taskService.save(this.currentList, task, method).then(() => {
+        this.taskService.save(this.currentList, task, method).then((newTask) => {
             this.alertService.success('Task saved successfully');
+            node.item = newTask;
+            this.currentTaskService.setTask(node);
         });
     }
 
@@ -251,6 +264,10 @@ export class TasksComponent implements OnInit {
     }
 
     changeView(view) {
+        this.activeView = view;
+    }
 
+    isViewActive(view) {
+        return view === this.activeView;
     }
 }

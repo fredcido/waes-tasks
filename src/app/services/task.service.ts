@@ -12,10 +12,15 @@ const ENDPOINT = '/tasks/v1/lists/';
 export class TaskService {
     constructor() {}
 
-    list(list: List): Promise<TreeNode> {
+    list(list: List, params = {}): Promise<TreeNode> {
         return new Promise<TreeNode>((resolve, reject) => {
             const url = `${ENDPOINT}${list.id}/tasks`;
-            gapi.client.request({'path': url}).then(({result}) => {
+            gapi.client.request(
+                    {
+                        'path': url,
+                        params: params
+                    }
+                ).then(({result}) => {
                 const tasks = <Task[]>result.items;
                 resolve(this.arrangeTree(tasks));
             }, function(reason) {
@@ -54,6 +59,8 @@ export class TaskService {
                 url += task.id;
             }
 
+            delete task.id;
+
             gapi.client.request(
                 {
                     'path': url,
@@ -61,7 +68,8 @@ export class TaskService {
                     'body': JSON.stringify(task)
                 }
             ).then((response) => {
-                resolve(response.result.items);
+                const newTask = Object.assign(new Task(), response.result);
+                resolve(newTask);
             }, (reason) => {
                 reject(reason);
             });

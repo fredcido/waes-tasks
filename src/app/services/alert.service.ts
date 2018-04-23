@@ -13,7 +13,7 @@ export class AlertService {
             message: message
         }, {
                 type: type,
-                timer: 1500,
+                timer: 1000,
                 placement: {
                     from: this.from,
                     align: this.align

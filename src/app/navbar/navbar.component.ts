@@ -1,10 +1,10 @@
 import { Component, OnInit, NgZone, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AuthService } from './../../services/auth.service';
-import { CurrentListService } from './../../services/current-list.service';
-import { User } from '../../models/user.model';
-import { List } from '../../models/list.model';
+import { AuthService } from './../services/auth.service';
+import { CurrentListService } from './../services/current-list.service';
+import { User } from '../models/user.model';
+import { List } from '../models/list.model';
 
 @Component({
     moduleId: module.id,
@@ -13,9 +13,9 @@ import { List } from '../../models/list.model';
 })
 
 export class NavbarComponent implements OnInit{
-    private user: User;
-    private currentList: List;
-    private activeView = 'default';
+    user: User;
+    currentList: List;
+    activeView = 'default';
 
     @Output() clearCompleted = new EventEmitter();
     @Output() newTask = new EventEmitter();

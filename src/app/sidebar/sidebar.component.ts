@@ -13,8 +13,8 @@ import { CurrentListService } from './../services/current-list.service';
 })
 
 export class SidebarComponent implements OnInit {
-    private lists: List[];
-    private currentList: List = null;
+    lists: List[];
+    currentList: List = null;
     closeResult: string;
 
     constructor(

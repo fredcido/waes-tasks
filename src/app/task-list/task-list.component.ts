@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+
 import { TreeNode } from '../models/tree-node.model';
+import { CurrentTaskService } from './../services/current-task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -13,16 +15,25 @@ export class TaskListComponent implements OnInit {
   @Output() blurNode: EventEmitter<TreeNode> = new EventEmitter<TreeNode>();
   @Output() onChange: EventEmitter<TreeNode> = new EventEmitter<TreeNode>();
 
-  private node: TreeNode = null;
+  node: TreeNode = null;
 
-  constructor() { }
+  constructor(
+    private currentTaskService: CurrentTaskService
+  ) {
+
+  }
 
   ngOnInit() {
+    this.currentTaskService.getObservable().subscribe(task => {
+      this.node = task;
+  });
   }
 
   selectTask(node: TreeNode) {
     this.node = node;
     this.taskSelected.emit(node);
+
+    this.currentTaskService.setTask(node);
   }
 
   completeTask(node: TreeNode) {

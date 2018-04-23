@@ -14,6 +14,10 @@
     display: block;
 }
 
+.notes {
+    display: block;
+}
+
 .undo-task {
     cursor: pointer;
     padding: 10px;
@@ -62,6 +66,8 @@
 
 .list-group-item.selected > .input-group .input-group-addon,
 .list-group-item.selected > .input-group .form-control,
-.list-group-item.selected > .input-group .done-task {
+.list-group-item.selected > .input-group .done-task,
+.list-group-item.selected > .input-group span,
+.list-group-item.selected > .input-group .due-date {
     background-color: rgb(247, 247, 230) !important;
 }

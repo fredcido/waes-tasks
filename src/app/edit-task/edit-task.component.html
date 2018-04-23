@@ -14,14 +14,14 @@
             <mat-datepicker #picker></mat-datepicker>
         </p>
         <p><textarea name="notes" class="form-control" placeholder="Notes" rows="3" [(ngModel)]="task.notes"></textarea></p>
-        <p>
+        <!-- <p>
             <select name="list" [(ngModel)]="task.list" required class="form-control">
                 <option>Move to list</option>
                 <option *ngFor="let list of lists" [ngValue]="list.id">
                     {{ list.title }}
                 </option>
             </select>
-        </p>
+        </p> -->
     </div>
     <div mat-dialog-actions class="btn-group pull-right" role="group">
         <button type="button" class="btn btn-danger" (click)="onNoClick()">Cancel</button>
