@@ -5,7 +5,7 @@ This project was developed using [Angular 5](https://angular.io/) and all of its
 * [NPM](https://www.npmjs.com/)
 * [Angular CLI](https://github.com/angular/angular-cli)
 
-The project will request Oauth2 access to your Google Task profile in order to manage your tasks.
+The project will request Oauth2 access to your Google Task profile in order to manage your tasks. The applicaton is also hosted at http://waes.fredericoestrela.com.
 
 ## Installing packages
 After cloning the repository, run `npm install` inside the directory to install all of its dependencies.

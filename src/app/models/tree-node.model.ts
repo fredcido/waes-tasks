@@ -7,24 +7,30 @@ export class TreeNode {
 
     insertBefore(node: TreeNode) {
         this.parent.children = this.parent.children.filter(item => item !== node);
+        node.setParent(this.parent);
         const index = this.parent.children.indexOf(this);
         this.parent.children.splice(index, 0, node);
+        return this;
     }
 
     insertAfter(node: TreeNode) {
         this.parent.children = this.parent.children.filter(item => item !== node);
+        node.setParent(this.parent);
         const index = this.parent.children.indexOf(this);
         this.parent.children.splice(index + 1, 0, node);
+        return this;
     }
 
     unshiftChild(node: TreeNode) {
         this.children.unshift(node);
         node.parent = this;
+        return this;
     }
 
     addChild(node: TreeNode) {
         node.parent = this;
         this.children.push(node);
+        return this;
     }
 
     removeChild(node: TreeNode) {
@@ -53,5 +59,6 @@ export class TreeNode {
         }
 
         parent.addChild(this);
+        return this;
     }
 }

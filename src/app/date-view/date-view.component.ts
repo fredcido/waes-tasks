@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { TreeNode } from '../models/tree-node.model';
 import * as moment from 'moment';
+
+import { CurrentTaskService } from './../services/current-task.service';
+import { TreeNode } from '../models/tree-node.model';
 
 @Component({
   selector: 'app-date-view',
@@ -17,13 +19,18 @@ export class DateViewComponent implements OnInit {
   dateItems = [];
   node: TreeNode = null;
 
-  constructor() { }
+  constructor(
+    private currentTaskService: CurrentTaskService
+  ) { }
 
   ngOnInit() {
     const temp = {};
     this.addTasks(this.root.children, temp);
 
     this.dateItems = Object.keys(temp).map(key => temp[key]);
+    this.currentTaskService.getObservable().subscribe(task => {
+        this.node = task;
+    });
   }
 
   addTasks(children: TreeNode[], temp) {
@@ -49,6 +56,7 @@ export class DateViewComponent implements OnInit {
 
   selectTask(node: TreeNode) {
     this.node = node;
+    this.currentTaskService.setTask(node);
     this.taskSelected.emit(node);
   }
 

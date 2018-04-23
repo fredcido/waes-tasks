@@ -25,8 +25,8 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit() {
     this.currentTaskService.getObservable().subscribe(task => {
-      this.node = task;
-  });
+        this.node = task;
+    });
   }
 
   selectTask(node: TreeNode) {
